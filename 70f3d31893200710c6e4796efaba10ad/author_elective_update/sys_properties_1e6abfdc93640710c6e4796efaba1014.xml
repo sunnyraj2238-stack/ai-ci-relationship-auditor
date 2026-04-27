@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="DELETE">
+        <choices/>
+        <description>Google Gemini API key for LLM-based CI relationship extraction</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_1412526_ai_ci_re.gemini.api_key</name>
+        <read_roles/>
+        <suffix>gemini.api_key</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 22:36:14</sys_created_on>
+        <sys_id>1e6abfdc93640710c6e4796efaba1014</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>x_1412526_ai_ci_re.gemini.api_key</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_update_name>sys_properties_1e6abfdc93640710c6e4796efaba1014</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-25 23:39:04</sys_updated_on>
+        <type>string</type>
+        <value>AIzaSyCQI1vSR3yTYPMbfwIW2PThLeLoB8JP3ig</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="DELETE" query="documentkey=1e6abfdc93640710c6e4796efaba1014"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</application>
+        <file_path/>
+        <instance_id>0917514cfb208bd00c92f633beefdcd8</instance_id>
+        <instance_name>dev390106</instance_name>
+        <name>sys_properties_1e6abfdc93640710c6e4796efaba1014</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>Google Gemini API key for LLM-based CI relationship extraction</description><ignore_cache>false</ignore_cache><is_private>false</is_private><name>x_1412526_ai_ci_re.gemini.api_key</name><read_roles/><suffix>gemini.api_key</suffix><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-04-25 22:36:14</sys_created_on><sys_id>1e6abfdc93640710c6e4796efaba1014</sys_id><sys_mod_count>4</sys_mod_count><sys_name>x_1412526_ai_ci_re.gemini.api_key</sys_name><sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package><sys_policy/><sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope><sys_update_name>sys_properties_1e6abfdc93640710c6e4796efaba1014</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-04-25 23:39:04</sys_updated_on><type>string</type><value>AIzaSyCQI1vSR3yTYPMbfwIW2PThLeLoB8JP3ig</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=1e6abfdc93640710c6e4796efaba1014"/></record_update>]]></payload>
+        <payload_hash>1032017665</payload_hash>
+        <record_name>x_1412526_ai_ci_re.gemini.api_key</record_name>
+        <reverted_from/>
+        <source>41f3d31893200710c6e4796efaba10db</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 23:39:05</sys_created_on>
+        <sys_id>03c8c46093280710c6e4796efaba10ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19dc702d90e0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-25 23:39:05</sys_updated_on>
+        <type>System Property</type>
+        <update_guid>47c8c460652807107e7e8b09fe1deceb</update_guid>
+        <update_guid_history>47c8c460652807107e7e8b09fe1deceb:1032017665,d58348a4f7e40710420bbe2dd595e815:390469894,8ed20c2423e4071013b2dc5a22178fc9:688941100,4620c0ac93a40710e1bd791fd985c779:-452825460,fe6abfdc166407108d7f840bfb4282c3:2072002241</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-27 07:04:51</sys_created_on>
+        <sys_db_object display_value="" name="sys_properties">sys_properties</sys_db_object>
+        <sys_id>b2e167e1a36f481ca520ece25765ec79</sys_id>
+        <sys_metadata>1e6abfdc93640710c6e4796efaba1014</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1412526_ai_ci_re.gemini.api_key</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_scope_delete display_value="">128548e3e5074ea59255b0b8371042e1</sys_scope_delete>
+        <sys_update_name>sys_properties_1e6abfdc93640710c6e4796efaba1014</sys_update_name>
+        <sys_update_version display_value="sys_properties_1e6abfdc93640710c6e4796efaba1014">03c8c46093280710c6e4796efaba10ed</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-27 07:04:51</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

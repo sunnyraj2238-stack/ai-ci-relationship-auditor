@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_module">
+    <sys_module action="INSERT_OR_UPDATE">
+        <content><![CDATA[import { gs } from '@servicenow/glide'
+
+export function showStateUpdate(current, previous) {
+    const currentState = current.getValue('state')
+    const previousState = previous.getValue('state')
+
+    gs.addInfoMessage(`state updated from "${previousState}" to "${currentState}"`)
+}
+]]></content>
+        <external_source>false</external_source>
+        <path>x_1412526_ai_ci_re/x-1412526-ai-ci-relationship-auditor/1.0.0/src/server/script.js</path>
+        <sys_class_name>sys_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+        <sys_id>8779eb8ba9e444059c31dfbe025be436</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1412526_ai_ci_re/x-1412526-ai-ci-relationship-auditor/1.0.0/src/server/script.js</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_update_name>sys_module_8779eb8ba9e444059c31dfbe025be436</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+    </sys_module>
+</record_update>

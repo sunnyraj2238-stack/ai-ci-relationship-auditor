@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_module">
+    <sys_module action="INSERT_OR_UPDATE">
+        <content><![CDATA[{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "serialNumber": "urn:uuid:b593c823-b6a6-4c2b-a04a-d2d8beb07087",
+  "metadata": {
+    "timestamp": "2026-04-27T07:40:07.575Z",
+    "tools": {
+      "components": [
+        {
+          "type": "library",
+          "name": "sdk-build-plugins",
+          "group": "@servicenow",
+          "version": "4.6.0",
+          "author": "ServiceNow"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "x-1412526-ai-ci-relationship-auditor",
+      "version": "1.0.0",
+      "bom-ref": "pkg:servicenow/x-1412526-ai-ci-relationship-auditor@1.0.0?sys_scope_id=70f3d31893200710c6e4796efaba10ad",
+      "description": "Analyzes ServiceNow Discovery logs using LLM to detect missing CI dependency relationships in the CMDB. Uses IRE validation and a confidence gate to auto-write high-confidence relationships and route low-confidence ones to human review.",
+      "licenses": [
+        {
+          "license": {
+            "name": "UNLICENSED"
+          }
+        }
+      ],
+      "purl": "pkg:servicenow/x-1412526-ai-ci-relationship-auditor@1.0.0?sys_scope_id=70f3d31893200710c6e4796efaba10ad"
+    }
+  },
+  "components": [],
+  "dependencies": [
+    {
+      "ref": "pkg:servicenow/x-1412526-ai-ci-relationship-auditor@1.0.0?sys_scope_id=70f3d31893200710c6e4796efaba10ad"
+    }
+  ]
+}]]></content>
+        <external_source>false</external_source>
+        <path>x_1412526_ai_ci_re/x-1412526-ai-ci-relationship-auditor/1.0.0/bom.json</path>
+        <sys_class_name>sys_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+        <sys_id>10dfe625610949bf83453a731f245582</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1412526_ai_ci_re/x-1412526-ai-ci-relationship-auditor/1.0.0/bom.json</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_update_name>sys_module_10dfe625610949bf83453a731f245582</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+    </sys_module>
+</record_update>

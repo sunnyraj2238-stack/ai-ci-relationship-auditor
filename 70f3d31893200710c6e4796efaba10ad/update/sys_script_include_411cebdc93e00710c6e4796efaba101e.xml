@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1412526_ai_ci_re.CIAudLLMParser</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Parses raw discovery log text using Groq (Llama 3.3 70B) to extract CI relationship candidates with confidence scores</description>
+        <mobile_callable>false</mobile_callable>
+        <name>CIAudLLMParser</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var CIAudLLMParser = Class.create();
+CIAudLLMParser.prototype = {
+
+    initialize: function() {
+        this.TABLE_LOG     = 'x_1412526_ai_ci_re_log_staging';
+        this.highThreshold = parseFloat(gs.getProperty('x_1412526_ai_ci_re.confidence.high', '0.85'));
+        this.lowThreshold  = parseFloat(gs.getProperty('x_1412526_ai_ci_re.confidence.low',  '0.60'));
+        this.model         = gs.getProperty('x_1412526_ai_ci_re.groq.model', 'llama-3.3-70b-versatile');
+        this.maxTokens     = parseInt(gs.getProperty('x_1412526_ai_ci_re.groq.max_tokens', '1500'));
+        this.apiKey        = gs.getProperty('x_1412526_ai_ci_re.groq.api_key', '');
+    },
+
+    // ── Main entry point ──────────────────────────────────────────────────
+    parseLog: function(logStagingSysId) {
+        var logGr = new GlideRecord(this.TABLE_LOG);
+        if (!logGr.get(logStagingSysId)) {
+            gs.error('CIAudLLMParser: Log record not found: ' + logStagingSysId);
+            return [];
+        }
+
+        logGr.status = 'Processing';
+        logGr.update();
+
+        try {
+            var ciList     = this._getKnownCIs();
+            var prompt     = this._buildPrompt(logGr.log_content.toString(), ciList);
+            var llmText    = this._callGroq(prompt);
+            var candidates = this._parseResponse(llmText);
+
+            logGr.candidate_count  = candidates.length;
+            logGr.status           = 'Processed';
+            logGr.processing_notes = 'Extracted ' + candidates.length + ' candidates via Groq ' + this.model;
+            logGr.update();
+
+            return candidates;
+        } catch(e) {
+            logGr.status        = 'Error';
+            logGr.error_message = e.message;
+            logGr.update();
+            gs.error('CIAudLLMParser: ' + e.message);
+            return [];
+        }
+    },
+
+    // ── Build structured prompt ───────────────────────────────────────────
+    _buildPrompt: function(logContent, ciList) {
+        var trimmedLog = logContent.substring(0, 4000);
+        return 'You are a ServiceNow CMDB relationship analyst.\n' +
+               'Analyze the following Discovery log and identify implied CI relationships ' +
+               'that do NOT yet exist in the CMDB.\n\n' +
+               'DISCOVERY LOG:\n' + trimmedLog + '\n\n' +
+               'KNOWN CIs IN CMDB (name | class | sys_id):\n' + ciList + '\n\n' +
+               'IMPORTANT RULES:\n' +
+               '  - source_ci_name and target_ci_name MUST be exact CI names from the list above\n' +
+               '  - NEVER use IP addresses, hostnames, or any value not in the CI name list\n' +
+               '  - If you cannot match a CI name exactly from the list, skip that relationship\n' +
+               '  - relationship_type must be one of: Runs on, Depends on, Connects to, Uses, Hosted on\n' +
+               '  - confidence: 0.0 to 1.0 (your certainty this relationship is real)\n' +
+               '  - evidence: specific log lines that imply this relationship\n' +
+               '  - Do not return relationships that obviously already exist\n' +
+               '  - Return ONLY a valid JSON array, no explanation text\n\n' +
+               'FORMAT: [{"source_ci_name":"","target_ci_name":"","relationship_type":"","confidence":0.0,"evidence":""}]';
+    },
+
+    // ── Fetch known CIs from CMDB ─────────────────────────────────────────
+    // Ordered by name ASC so meaningful named CIs surface first.
+    // Limit 200 to stay within prompt token budget while covering more CIs.
+    _getKnownCIs: function() {
+        var lines = [];
+        var ci = new GlideRecord('cmdb_ci');
+        ci.addActiveQuery();
+        ci.addNotNullQuery('name');
+        ci.addQuery('name', '!=', '');
+        ci.orderBy('name');
+        ci.setLimit(200);
+        ci.query();
+        while (ci.next()) {
+            lines.push(ci.name + ' | ' + ci.sys_class_name + ' | ' + ci.sys_id);
+        }
+        return lines.join('\n');
+    },
+
+    // ── Call Groq API (OpenAI-compatible) ─────────────────────────────────
+    _callGroq: function(prompt) {
+        if (!this.apiKey || this.apiKey === '') {
+            throw new Error('Groq API key not configured. Set x_1412526_ai_ci_re.groq.api_key in System Properties.');
+        }
+        var r = new sn_ws.RESTMessageV2();
+        r.setEndpoint('https://api.groq.com/openai/v1/chat/completions');
+        r.setHttpMethod('POST');
+        r.setRequestHeader('Authorization', 'Bearer ' + this.apiKey);
+        r.setRequestHeader('Content-Type', 'application/json');
+        r.setRequestBody(JSON.stringify({
+            model: this.model,
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.1,
+            max_tokens: this.maxTokens
+        }));
+        r.setHttpTimeout(60000);
+
+        var response = r.execute();
+        var httpCode = response.getStatusCode();
+        if (httpCode !== 200) {
+            throw new Error('Groq API error ' + httpCode + ': ' + response.getBody());
+        }
+        var body = JSON.parse(response.getBody());
+        return body.choices[0].message.content;
+    },
+
+    // ── Parse and validate LLM JSON response ─────────────────────────────
+    _parseResponse: function(llmText) {
+        var jsonMatch = llmText.match(/\[[\s\S]*\]/);
+        if (!jsonMatch) {
+            throw new Error('No JSON array found in LLM response. Raw: ' + llmText.substring(0, 200));
+        }
+        var items = JSON.parse(jsonMatch[0]);
+        return items.filter(function(item) {
+            return item.source_ci_name &&
+                   item.target_ci_name &&
+                   item.relationship_type &&
+                   typeof item.confidence === 'number';
+        });
+    },
+
+    type: 'CIAudLLMParser'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 21:33:38</sys_created_on>
+        <sys_id>411cebdc93e00710c6e4796efaba101e</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CIAudLLMParser</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_update_name>sys_script_include_411cebdc93e00710c6e4796efaba101e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-27 07:11:43</sys_updated_on>
+    </sys_script_include>
+</record_update>

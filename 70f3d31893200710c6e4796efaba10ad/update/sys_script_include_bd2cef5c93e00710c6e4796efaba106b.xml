@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1412526_ai_ci_re.CIAudIREValidator</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Validates LLM-extracted relationship candidates against IRE rules: CI existence, self-reference check, duplicate detection, already-staged check</description>
+        <mobile_callable>false</mobile_callable>
+        <name>CIAudIREValidator</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var CIAudIREValidator = Class.create();
+CIAudIREValidator.prototype = {
+
+    initialize: function() {
+        this.TABLE_CANDIDATE = 'x_1412526_ai_ci_re_relationship_candidate';
+        // Maps LLM-friendly names to exact cmdb_rel_type names in this PDI
+        this.REL_TYPE_MAP = {
+            'Runs on':    'Runs on::Runs',
+            'Depends on': 'Depends on::Used by',
+            'Connects to':'Connects to::Connected by',
+            'Uses':       'Uses::Used by',
+            'Hosted on':  'Hosted on::Hosts'
+        };
+    },
+
+    validate: function(candidate) {
+        var result = {
+            valid:        false,
+            sourceSysId:  null,
+            targetSysId:  null,
+            relTypeSysId: null,
+            reason:       ''
+        };
+
+        result.sourceSysId = this._resolveCI(candidate.source_ci_name);
+        if (!result.sourceSysId) {
+            result.reason = 'Source CI not found: ' + candidate.source_ci_name;
+            return result;
+        }
+
+        result.targetSysId = this._resolveCI(candidate.target_ci_name);
+        if (!result.targetSysId) {
+            result.reason = 'Target CI not found: ' + candidate.target_ci_name;
+            return result;
+        }
+
+        if (result.sourceSysId === result.targetSysId) {
+            result.reason = 'Source and target are the same CI';
+            return result;
+        }
+
+        result.relTypeSysId = this._resolveRelType(candidate.relationship_type);
+        if (!result.relTypeSysId) {
+            result.reason = 'Unknown relationship type: ' + candidate.relationship_type;
+            return result;
+        }
+
+        if (this._isDuplicate(result.sourceSysId, result.targetSysId, result.relTypeSysId)) {
+            result.reason = 'Relationship already exists in CMDB';
+            return result;
+        }
+
+        if (this._isAlreadyStaged(result.sourceSysId, result.targetSysId, result.relTypeSysId)) {
+            result.reason = 'Candidate already exists in review queue (Pending or Approved)';
+            return result;
+        }
+
+        result.valid = true;
+        return result;
+    },
+
+    _resolveCI: function(ciName) {
+        var ci = new GlideRecord('cmdb_ci');
+        ci.addQuery('name', ciName);
+        ci.addActiveQuery();
+        ci.setLimit(1);
+        ci.query();
+        if (ci.next()) return ci.sys_id.toString();
+
+        ci = new GlideRecord('cmdb_ci');
+        ci.addQuery('name', 'CONTAINS', ciName);
+        ci.addActiveQuery();
+        ci.setLimit(1);
+        ci.query();
+        if (ci.next()) return ci.sys_id.toString();
+
+        return null;
+    },
+
+    _resolveRelType: function(llmTypeName) {
+        var snName = this.REL_TYPE_MAP[llmTypeName] || llmTypeName;
+        var rt = new GlideRecord('cmdb_rel_type');
+        rt.addQuery('name', snName);
+        rt.setLimit(1);
+        rt.query();
+        return rt.next() ? rt.sys_id.toString() : null;
+    },
+
+    _isDuplicate: function(srcId, tgtId, relTypeId) {
+        var rel = new GlideRecord('cmdb_rel_ci');
+        rel.addQuery('parent', srcId);
+        rel.addQuery('child',  tgtId);
+        rel.addQuery('type',   relTypeId);
+        rel.query();
+        return rel.hasNext();
+    },
+
+    _isAlreadyStaged: function(srcId, tgtId, relTypeId) {
+        var cand = new GlideRecord(this.TABLE_CANDIDATE);
+        cand.addQuery('source_ci',        srcId);
+        cand.addQuery('target_ci',         tgtId);
+        cand.addQuery('relationship_type', relTypeId);
+        cand.addQuery('status', 'IN', 'Pending,Approved');
+        cand.query();
+        return cand.hasNext();
+    },
+
+    type: 'CIAudIREValidator'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 21:33:56</sys_created_on>
+        <sys_id>bd2cef5c93e00710c6e4796efaba106b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CIAudIREValidator</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_update_name>sys_script_include_bd2cef5c93e00710c6e4796efaba106b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-26 00:01:18</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1412526_ai_ci_re.CIAudCMDBWriter</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Writes approved relationship candidates to cmdb_rel_ci with a final IRE duplicate check. Records every operation in the immutable audit log.</description>
+        <mobile_callable>false</mobile_callable>
+        <name>CIAudCMDBWriter</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var CIAudCMDBWriter = Class.create();
+CIAudCMDBWriter.prototype = {
+
+    initialize: function() {
+        this.TABLE_CANDIDATE = 'x_1412526_ai_ci_re_relationship_candidate';
+        this.TABLE_AUDIT     = 'x_1412526_ai_ci_re_ci_audit_log';
+    },
+
+    writeRelationship: function(candidateSysId) {
+        var cand = new GlideRecord(this.TABLE_CANDIDATE);
+        if (!cand.get(candidateSysId)) {
+            gs.error('CIAudCMDBWriter: Candidate not found: ' + candidateSysId);
+            return null;
+        }
+
+        var validator = new CIAudIREValidator();
+        if (validator._isDuplicate(
+                cand.source_ci.toString(),
+                cand.target_ci.toString(),
+                cand.relationship_type.toString())) {
+            cand.status = 'Duplicate';
+            cand.update();
+            this._audit('Write', candidateSysId, 'Skipped', 'Relationship already exists in CMDB at write time');
+            return null;
+        }
+
+        var rel = new GlideRecord('cmdb_rel_ci');
+        rel.parent = cand.source_ci;
+        rel.child  = cand.target_ci;
+        rel.type   = cand.relationship_type;
+        var newRelId = rel.insert();
+
+        if (!newRelId) {
+            this._audit('Write', candidateSysId, 'Failed', 'cmdb_rel_ci insert returned no sys_id');
+            gs.error('CIAudCMDBWriter: Insert failed for candidate ' + candidateSysId);
+            return null;
+        }
+
+        cand.status          = 'Written';
+        cand.cmdb_rel_sys_id = newRelId;
+        cand.update();
+
+        this._audit('Write', candidateSysId, 'Success',
+            'Relationship written to CMDB: ' + newRelId);
+
+        gs.info('CIAudCMDBWriter: Written relationship ' + newRelId +
+            ' for candidate ' + candidateSysId);
+        return newRelId;
+    },
+
+    stageCandidate: function(candidate, ireResult, logStagingSysId) {
+        var highThreshold = parseFloat(gs.getProperty('x_1412526_ai_ci_re.confidence.high', '0.85'));
+        var lowThreshold  = parseFloat(gs.getProperty('x_1412526_ai_ci_re.confidence.low',  '0.60'));
+        var score         = parseFloat(candidate.confidence);
+
+        var tier = score >= highThreshold ? 'High' :
+                   score >= lowThreshold  ? 'Medium' : 'Low';
+
+        var cand = new GlideRecord(this.TABLE_CANDIDATE);
+        cand.source_ci         = ireResult.sourceSysId;
+        cand.target_ci         = ireResult.targetSysId;
+        cand.relationship_type = ireResult.relTypeSysId;
+        cand.confidence_score  = score;
+        cand.confidence_tier   = tier;
+        cand.evidence_text     = candidate.evidence || '';
+        cand.llm_rationale     = candidate.relationship_type + ' inferred from discovery log';
+        cand.status            = 'Pending';
+        cand.log_source        = logStagingSysId;
+        var candSysId = cand.insert();
+
+        this._audit('Parse', candSysId, 'Success',
+            'Candidate staged: ' + candidate.source_ci_name +
+            ' -> ' + candidate.target_ci_name +
+            ' (' + tier + ', ' + score + ')');
+
+        if (tier === 'High') {
+            return this.writeRelationship(candSysId);
+        }
+
+        return candSysId;
+    },
+
+    _audit: function(operation, candidateSysId, result, detail) {
+        var log = new GlideRecord(this.TABLE_AUDIT);
+        log.operation   = operation;
+        log.candidate   = candidateSysId;
+        log.result      = result;
+        log.detail      = detail;
+        log.executed_by = gs.getUserID();
+        log.insert();
+    },
+
+    type: 'CIAudCMDBWriter'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 21:34:10</sys_created_on>
+        <sys_id>8d3c631093240710c6e4796efaba1045</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>CIAudCMDBWriter</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_update_name>sys_script_include_8d3c631093240710c6e4796efaba1045</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-25 22:26:38</sys_updated_on>
+    </sys_script_include>
+</record_update>

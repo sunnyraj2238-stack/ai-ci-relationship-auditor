@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="6571ffd893240710c6e4796efaba1039" label="Relationship Candidate" max_length="40" name="x_1412526_ai_ci_re_relationship_candidate" type="collection">
+        <element label="Log Source" max_length="32" name="log_source" reference="x_1412526_ai_ci_re_log_staging" type="reference"/>
+        <element label="LLM Rationale" max_length="2000" name="llm_rationale" type="string"/>
+        <element label="Source CI" max_length="32" name="source_ci" reference="cmdb_ci" type="reference"/>
+        <element label="Relationship Type" max_length="32" name="relationship_type" reference="cmdb_rel_type" type="reference"/>
+        <element choice="3" default="pending" label="Status" max_length="255" name="status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Approved" sequence="1" value="approved"/>
+                <element inactive_on_update="false" label="Rejected" sequence="2" value="rejected"/>
+                <element inactive_on_update="false" label="Written" sequence="3" value="written"/>
+                <element inactive_on_update="false" label="Pending" sequence="0" value="pending"/>
+                <element inactive_on_update="false" label="Duplicate" sequence="4" value="duplicate"/>
+            </choice>
+        </element>
+        <element label="Review Notes" max_length="2000" name="review_notes" type="string"/>
+        <element label="CMDB Rel Sys ID" max_length="32" name="cmdb_rel_sys_id" type="string"/>
+        <element choice="2" label="Confidence Tier" max_length="40" name="confidence_tier" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Medium" sequence="1" value="medium"/>
+                <element inactive_on_update="false" label="Low" sequence="2" value="low"/>
+                <element inactive_on_update="false" label="High" sequence="0" value="high"/>
+            </choice>
+        </element>
+        <element label="Confidence Score" max_length="38" name="confidence_score" type="decimal"/>
+        <element label="Reviewed By" max_length="32" name="reviewed_by" reference="sys_user" type="reference"/>
+        <element label="Reviewed On" max_length="40" name="reviewed_on" type="glide_date_time"/>
+        <element label="Evidence Text" max_length="4000" name="evidence_text" type="string"/>
+        <element label="Target CI" max_length="32" name="target_ci" reference="cmdb_ci" type="reference"/>
+        <index name="index">
+            <element name="log_source"/>
+        </index>
+        <index name="index2">
+            <element name="relationship_type"/>
+        </index>
+        <index name="index3">
+            <element name="reviewed_by"/>
+        </index>
+        <index name="index4">
+            <element name="source_ci"/>
+        </index>
+        <index name="index5">
+            <element name="target_ci"/>
+        </index>
+    </element>
+</database>
