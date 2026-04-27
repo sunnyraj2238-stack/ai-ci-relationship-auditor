@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="Task table schema" source="com.glide.task">07e45024f54003100a22c0b3dfa151f4</dependency>
+        <min_version>1.0.0</min_version>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 21:49:23</sys_created_on>
+        <sys_id>c0bfe7d493240710c6e4796efaba1093</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-25 21:49:23</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

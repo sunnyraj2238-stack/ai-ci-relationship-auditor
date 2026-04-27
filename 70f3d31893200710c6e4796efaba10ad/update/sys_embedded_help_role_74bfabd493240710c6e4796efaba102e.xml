@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_1412526_ai_ci_re.reviewer" name="x_1412526_ai_ci_re.reviewer">74bf6bd493240710c6e4796efaba10f7</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 21:49:26</sys_created_on>
+        <sys_id>74bfabd493240710c6e4796efaba102e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>74bf6bd493240710c6e4796efaba10f7</sys_name>
+        <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_update_name>sys_embedded_help_role_74bfabd493240710c6e4796efaba102e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-25 21:49:26</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

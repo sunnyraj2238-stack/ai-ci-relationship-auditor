@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="DELETE">
+        <choices/>
+        <description>OpenAI model to use for log parsing (e.g. gpt-4o, gpt-4-turbo)</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_1412526_ai_ci_re.openai.model</name>
+        <read_roles/>
+        <suffix/>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 21:13:22</sys_created_on>
+        <sys_id>107727d093e00710c6e4796efaba10b7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1412526_ai_ci_re.openai.model</sys_name>
+        <sys_package display_value="AI CI Relationships" source="x_1412526_ai_ci_0">aa0d135c93600710c6e4796efaba100e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationships">aa0d135c93600710c6e4796efaba100e</sys_scope>
+        <sys_update_name>sys_properties_107727d093e00710c6e4796efaba10b7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-25 21:13:22</sys_updated_on>
+        <type>string</type>
+        <value>gpt-4o</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="DELETE" query="documentkey=107727d093e00710c6e4796efaba10b7"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="">aa0d135c93600710c6e4796efaba100e</application>
+        <file_path/>
+        <instance_id>0917514cfb208bd00c92f633beefdcd8</instance_id>
+        <instance_name>dev390106</instance_name>
+        <name>sys_properties_107727d093e00710c6e4796efaba10b7</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>OpenAI model to use for log parsing (e.g. gpt-4o, gpt-4-turbo)</description><ignore_cache>false</ignore_cache><is_private>false</is_private><name>x_1412526_ai_ci_re.openai.model</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-04-25 21:13:22</sys_created_on><sys_id>107727d093e00710c6e4796efaba10b7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_1412526_ai_ci_re.openai.model</sys_name><sys_package display_value="AI CI Relationships" source="x_1412526_ai_ci_0">aa0d135c93600710c6e4796efaba100e</sys_package><sys_policy/><sys_scope display_value="AI CI Relationships">aa0d135c93600710c6e4796efaba100e</sys_scope><sys_update_name>sys_properties_107727d093e00710c6e4796efaba10b7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-04-25 21:13:22</sys_updated_on><type>string</type><value>gpt-4o</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=107727d093e00710c6e4796efaba10b7"/></record_update>]]></payload>
+        <payload_hash>-1254348938</payload_hash>
+        <record_name>x_1412526_ai_ci_re.openai.model</record_name>
+        <reverted_from/>
+        <source>a60d135c93600710c6e4796efaba1011</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-25 21:13:22</sys_created_on>
+        <sys_id>247727d093e00710c6e4796efaba10fd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19dc67d71330000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-25 21:13:22</sys_updated_on>
+        <type>System Property</type>
+        <update_guid>a87727d033e0071008929f3fcc529efb</update_guid>
+        <update_guid_history>a87727d033e0071008929f3fcc529efb:-1254348938</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-27 07:05:11</sys_created_on>
+        <sys_db_object display_value="" name="sys_properties">sys_properties</sys_db_object>
+        <sys_id>46b9a7db86f444bb847f47f26385fd31</sys_id>
+        <sys_metadata>107727d093e00710c6e4796efaba10b7</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1412526_ai_ci_re.openai.model</sys_name>
+        <sys_package display_value="">aa0d135c93600710c6e4796efaba100e</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+        <sys_scope_delete display_value="">128548e3e5074ea59255b0b8371042e1</sys_scope_delete>
+        <sys_update_name>sys_properties_107727d093e00710c6e4796efaba10b7</sys_update_name>
+        <sys_update_version display_value="sys_properties_107727d093e00710c6e4796efaba10b7">247727d093e00710c6e4796efaba10fd</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-27 07:05:11</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

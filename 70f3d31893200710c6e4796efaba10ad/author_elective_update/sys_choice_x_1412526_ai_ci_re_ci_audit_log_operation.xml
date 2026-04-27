@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="operation" table="x_1412526_ai_ci_re_ci_audit_log" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>operation</element>
+            <name>x_1412526_ai_ci_re_ci_audit_log</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-25 22:16:21</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>operation</sys_name>
+            <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+            <sys_update_name>sys_choice_x_1412526_ai_ci_re_ci_audit_log_operation</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-25 22:16:21</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>operation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Parse</label>
+            <language>en</language>
+            <name>x_1412526_ai_ci_re_ci_audit_log</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+            <value>parse</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>operation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Validate</label>
+            <language>en</language>
+            <name>x_1412526_ai_ci_re_ci_audit_log</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+            <value>validate</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>operation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Approve</label>
+            <language>en</language>
+            <name>x_1412526_ai_ci_re_ci_audit_log</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+            <value>approve</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>operation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Reject</label>
+            <language>en</language>
+            <name>x_1412526_ai_ci_re_ci_audit_log</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+            <value>reject</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>operation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Write</label>
+            <language>en</language>
+            <name>x_1412526_ai_ci_re_ci_audit_log</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+            <value>write</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>operation</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Error</label>
+            <language>en</language>
+            <name>x_1412526_ai_ci_re_ci_audit_log</name>
+            <sequence>5</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-27 07:40:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-27 07:40:16</sys_updated_on>
+            <value>error</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

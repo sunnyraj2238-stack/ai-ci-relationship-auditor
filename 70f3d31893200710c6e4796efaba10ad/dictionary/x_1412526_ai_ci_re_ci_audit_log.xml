@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="ea04739093640710c6e4796efaba1042" label="CI Audit Log" max_length="40" name="x_1412526_ai_ci_re_ci_audit_log" type="collection">
+        <element label="Executed By" max_length="32" name="executed_by" reference="sys_user" type="reference"/>
+        <element choice="2" label="Result" max_length="255" name="result" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Failed" sequence="1" value="failed"/>
+                <element inactive_on_update="false" label="Success" sequence="0" value="success"/>
+                <element inactive_on_update="false" label="Skipped" sequence="2" value="skipped"/>
+            </choice>
+        </element>
+        <element label="Detail" max_length="2000" name="detail" type="string"/>
+        <element choice="2" label="operation" max_length="50" name="operation" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Approve" sequence="2" value="approve"/>
+                <element inactive_on_update="false" label="Parse" sequence="0" value="parse"/>
+                <element inactive_on_update="false" label="Error" sequence="5" value="error"/>
+                <element inactive_on_update="false" label="Reject" sequence="3" value="reject"/>
+                <element inactive_on_update="false" label="Write" sequence="4" value="write"/>
+                <element inactive_on_update="false" label="Validate" sequence="1" value="validate"/>
+            </choice>
+        </element>
+        <element label="candidate" max_length="32" name="candidate" reference="x_1412526_ai_ci_re_relationship_candidate" type="reference"/>
+        <index name="index">
+            <element name="candidate"/>
+        </index>
+        <index name="index2">
+            <element name="executed_by"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="target_ci" label="Target CI" language="en" table="x_1412526_ai_ci_re_relationship_candidate">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>target_ci</element>
+            <help/>
+            <hint/>
+            <label>Target CI</label>
+            <language>en</language>
+            <name>x_1412526_ai_ci_re_relationship_candidate</name>
+            <plural/>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-04-25 22:05:07</sys_created_on>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_name>Target CI</sys_name>
+            <sys_package display_value="AI CI Relationship Auditor" source="x_1412526_ai_ci_re">70f3d31893200710c6e4796efaba10ad</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="AI CI Relationship Auditor">70f3d31893200710c6e4796efaba10ad</sys_scope>
+            <sys_update_name>sys_documentation_x_1412526_ai_ci_re_relationship_candidate_target_ci_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-04-25 22:05:10</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
